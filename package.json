@@ -1,0 +1,34 @@
+{
+  "name": "hugo-setup",
+  "private": true,
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "commitiquette": "^1.0.9",
+    "commitizen": "^4.2.2",
+    "husky": "^4.3.6",
+    "lerna": "^3.22.1"
+  },
+  "version": "0.1.0",
+  "description": "A Hugo setup using Lerna & Netlify CMS. This is a monorepo that builds/servers my website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/prncevince/hugo-setup.git"
+  },
+  "author": "Vincent Clemson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/prncevince/hugo-setup/issues"
+  },
+  "homepage": "https://gitlab.com/prncevince/hugo-setup#readme",
+  "config": {
+    "commitizen": {
+      "path": "commitiquette"
+    }
+  }
+}
