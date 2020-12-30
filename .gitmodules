@@ -1,0 +1,3 @@
+[submodule "packages/cms"]
+	path = packages/cms
+	url = git@gitlab.com:prncevince/hugo-netlify-cms.git
