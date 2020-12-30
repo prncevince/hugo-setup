@@ -36,7 +36,7 @@ Clone the repo and `npm install`.
 
 ### Add New Submodules 
 
-`git submodule add git@remote-url.git ./packages/pkg-submodule`
+`git submodule add git@remote-url.git ./packages/pkg-submodule`<br>
 `git submodule absorbgitdirs packages/pkg-submodule`
 
 ### Configure Git Hooks for Submodules
