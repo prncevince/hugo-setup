@@ -28,7 +28,7 @@
     "postinstall": "run-s setup:*",
     "setup:husky": "husky install",
     "setup:repo": "lerna bootstrap --hoist",
-    "setup:hooks": "lerna run git config core.hooksPath ../../.husky",
+    "setup:hooks": "lerna exec git config core.hooksPath ../../.husky",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "config": {
