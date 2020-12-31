@@ -20,13 +20,15 @@
     "commitizen": "^4.2.2",
     "husky": "^5.0.6",
     "lerna": "^3.22.1",
+    "npm-run-all": "^4.1.5",
     "webpack": "^5.11.1"
   },
   "main": "index.js",
   "scripts": {
-    "hooks": "lerna run git:hookspath",
-    "hoist": "lerna boostrap --hoist",
-    "postinstall": "husky install && lerna bootstrap --hoist && lerna run git:hookspath",
+    "postinstall": "run-s setup:*",
+    "setup:husky": "husky install",
+    "setup:repo": "lerna bootstrap --hoist",
+    "setup:hooks": "lerna run git config core.hooksPath ../../.husky",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "config": {
