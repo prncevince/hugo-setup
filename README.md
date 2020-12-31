@@ -20,11 +20,14 @@ A Hugo setup using Lerna & Netlify CMS. This is a monorepo that builds/servers m
 |--packages/
 |  |--cms/
 |  |  |--.git
+|  |  |--package.json
 |  |--app-1/
 |  |  |--.git
+|  |  |--package.json
 ...
 |  |--app-n/
 |  |  |--.git
+|  |  |--package.json
 |--.gitmodules
 |--lerna.json
 |--package.json
@@ -32,8 +35,15 @@ A Hugo setup using Lerna & Netlify CMS. This is a monorepo that builds/servers m
 
 ## Install & Setup 
 
-Clone the repo and `npm install`. 
-
+1. Clone the repo and its submodues:
+- `git clone --recurse-submodules git@gitlab.com:prncevince/hugo-setup.git`
+2. Install npm packages and setup:
+- `npm install`
+  - This installs the root repo npm packages.
+  - Then, `husky install` sets up husky Git hooks 
+  - Then, `lerna bootstrap --hoist` installs the "leaf" packages `dependencies` & `devDependencies`.
+    - The `dependencies` and `devDependencies` shared across packages are ["hoisted"](https://github.com/lerna/lerna/blob/main/doc/hoist.md) using the `--hoist` flag
+  - Then, `lerna run git:hookspath` adds the hook path as the root `./.husky/` for all submodules
 ### Add New Submodules 
 
 `git submodule add git@remote-url.git ./packages/pkg-submodule`<br>
