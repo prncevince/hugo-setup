@@ -18,10 +18,13 @@
     "@commitlint/config-conventional": "^11.0.0",
     "commitiquette": "^1.0.9",
     "commitizen": "^4.2.2",
+    "hugo-bin": "^0.68.0",
     "husky": "^5.0.6",
     "lerna": "^3.22.1",
+    "netlify-cms-proxy-server": "^1.3.8",
     "npm-run-all": "^4.1.5",
-    "webpack": "^5.11.1"
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1"
   },
   "main": "index.js",
   "scripts": {
@@ -29,6 +32,9 @@
     "setup:husky": "husky install",
     "setup:repo": "lerna bootstrap --hoist",
     "setup:hooks": "lerna exec git config core.hooksPath ../../.husky",
+    "start": "run-p start:*",
+    "start:hugo": "hugo server -D -s site",
+    "start:cms": "lerna run --scope hugo-site netlify-cms-proxy-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "config": {
