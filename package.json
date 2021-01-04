@@ -28,6 +28,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "chroma:nightowl": "./site/tools/nightowl.sh",
     "postinstall": "run-s setup:*",
     "setup:husky": "husky install",
     "setup:repo": "lerna bootstrap --hoist",
