@@ -1,3 +1,6 @@
 [submodule "packages/cms"]
 	path = packages/cms
 	url = git@gitlab.com:prncevince/hugo-netlify-cms.git
+[submodule "site"]
+	path = site
+	url = git@gitlab.com:prncevince/hugo-site.git

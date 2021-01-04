@@ -31,7 +31,7 @@
     "postinstall": "run-s setup:*",
     "setup:husky": "husky install",
     "setup:repo": "lerna bootstrap --hoist",
-    "setup:hooks": "lerna exec git config core.hooksPath ../../.husky",
+    "setup:hooks": "lerna exec --ignore hugo-site git config core.hooksPath ../../.husky",
     "start": "run-p start:*",
     "start:hugo": "hugo server -D -s site",
     "start:cms": "lerna run --scope hugo-site netlify-cms-proxy-server",
