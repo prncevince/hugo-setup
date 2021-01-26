@@ -3,12 +3,13 @@ const common = require('./webpack.common')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const PurgecssPlugin = require('purgecss-webpack-plugin')
-const glob = require('glob')
+const glob = require('glob-all')
 const path = require('path')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 const PURGE_PATHS = {
-  src: path.join(__dirname, 'src')
+  packages: path.join(__dirname, 'packages'),
+  site: path.join(__dirname, 'site')
 }
 
 const merged = merge(common, {
@@ -16,19 +17,32 @@ const merged = merge(common, {
   // devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Production'
+      title: 'Netlify CMS',
+      template: './packages/cms/cms.html',
+      filename: 'admin/index.html',
+      inject: false
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Production',
+      inject: false,
+      template: './site/index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css'
+      filename: '[name]/css/[name].[contenthash].css'
       // chunkFilename: '[id].[contenthash].css'
     }),
     new PurgecssPlugin({
-      paths: glob.sync(`${PURGE_PATHS.src}/**/*`, { nodir: true })
+      paths: () => glob.sync(
+        [`${PURGE_PATHS.packages}/**/*`, `${PURGE_PATHS.site}/**/*`],
+        {
+          nodir: true, ignore: '**/node_modules/**/*'
+        }
+      )
     }),
     new CssMinimizerPlugin({})
   ],
   output: {
-    filename: '[name].[contenthash].js'
+    filename: '[name]/js/[name].[contenthash].js'
   }
 })
 

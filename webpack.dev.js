@@ -14,11 +14,11 @@ const merged = merge(common, {
     new HtmlWebpackPlugin({
       title: 'Development',
       inject: false,
-      template: './index.html'
+      template: './site/index.html'
     })
   ],
   output: {
-    filename: '[name].js'
+    filename: '[name]/js/[name].js'
   }
 })
 
