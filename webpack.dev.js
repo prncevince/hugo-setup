@@ -12,9 +12,10 @@ const merged = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Development',
-      inject: false,
-      template: './site/index.html'
+      title: 'Hugo Netlify CMS',
+      template: './packages/cms/cms.html',
+      filename: 'admin/index.html',
+      inject: false
     })
   ],
   output: {

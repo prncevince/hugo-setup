@@ -17,15 +17,10 @@ const merged = merge(common, {
   // devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Netlify CMS',
+      title: 'Hugo Netlify CMS',
       template: './packages/cms/cms.html',
       filename: 'admin/index.html',
       inject: false
-    }),
-    new HtmlWebpackPlugin({
-      title: 'Production',
-      inject: false,
-      template: './site/index.html'
     }),
     new MiniCssExtractPlugin({
       filename: '[name]/css/[name].[contenthash].css'
@@ -33,7 +28,7 @@ const merged = merge(common, {
     }),
     new PurgecssPlugin({
       paths: () => glob.sync(
-        [`${PURGE_PATHS.packages}/**/*`, `${PURGE_PATHS.site}/**/*`],
+        Object.values(PURGE_PATHS).map(i => i + '/**/*s'),
         {
           nodir: true, ignore: '**/node_modules/**/*'
         }
