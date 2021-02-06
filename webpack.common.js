@@ -11,6 +11,10 @@ module.exports = {
     site: './site/src/index.js',
     theme: path.join(__dirname, 'site/themes', process.env.THEME, 'src/js/main.js')
   },
+  output: {
+    path: path.resolve(__dirname, 'dist/lib'),
+    publicPath: process.env.PUBLIC_PATH
+  },
   module: {
     rules: [
       {
@@ -25,7 +29,7 @@ module.exports = {
   },
   plugins: [
     new AssetsPlugin({
-      filename: 'webpack.json',
+      filename: 'webpack_assets.json',
       path: path.join(__dirname, 'site/data'),
       prettyPrint: true
     }),
@@ -65,9 +69,10 @@ module.exports = {
         }
       }
     }
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist/lib'),
-    publicPath: process.env.PUBLIC_PATH
   }
+}
+
+if (process.env.THEME === 'ananke') {
+  module.exports.entry.app = module.exports.entry.theme
+  delete module.exports.entry.theme
 }
