@@ -14,6 +14,9 @@ const PURGE_PATHS = {
 
 const merged = merge(common, {
   mode: 'production',
+  output: {
+    filename: '[name]/js/[name].[contenthash].js'
+  },
   // devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
@@ -35,10 +38,7 @@ const merged = merge(common, {
       )
     }),
     new CssMinimizerPlugin({})
-  ],
-  output: {
-    filename: '[name]/js/[name].[contenthash].js'
-  }
+  ]
 })
 
 const rules = [

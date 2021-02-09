@@ -8,7 +8,6 @@ require('dotenv').config()
 module.exports = {
   entry: {
     cms: path.join(__dirname, 'packages/cms/js/cms.js'),
-    site: './site/src/index.js',
     theme: path.join(__dirname, 'site/themes', process.env.THEME, 'src/js/main.js')
   },
   output: {
@@ -45,6 +44,7 @@ module.exports = {
     }),
     new ESLintPlugin({
       cache: true,
+      cacheLocation: path.join(__dirname, 'node_modules/.cache/eslint/'),
       emitWarning: true,
       fix: true
     })
@@ -52,8 +52,7 @@ module.exports = {
   optimization: {
     // v5 sets usedExports to true by default
     usedExports: true,
-    // moduleIds: 'deterministic', // webpack v5
-    moduleIds: 'hashed',
+    moduleIds: 'deterministic',
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {

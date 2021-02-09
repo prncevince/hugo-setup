@@ -4,6 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const merged = merge(common, {
   mode: 'development',
+  output: {
+    filename: '[name]/js/[name].js'
+  },
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
@@ -17,10 +20,7 @@ const merged = merge(common, {
       filename: 'admin/index.html',
       inject: false
     })
-  ],
-  output: {
-    filename: '[name]/js/[name].js'
-  }
+  ]
 })
 
 merged.module.rules.filter(o => Boolean(o.use)).filter(o => o.use[0] === 'css-loader')[0].use.unshift('style-loader')

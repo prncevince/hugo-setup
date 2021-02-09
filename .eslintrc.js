@@ -5,7 +5,7 @@ module.exports = {
     node: true
   },
   extends: [
-    'standard'
+    'standard', 'standard-jsx', 'standard-react'
   ],
   parserOptions: {
     ecmaVersion: 12,
