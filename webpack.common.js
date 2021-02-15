@@ -11,7 +11,7 @@ module.exports = {
     theme: path.join(__dirname, 'site/themes', process.env.THEME, 'src/js/main.js')
   },
   output: {
-    path: path.resolve(__dirname, 'dist/lib'),
+    path: path.join(__dirname, 'dist/lib'),
     publicPath: process.env.PUBLIC_PATH
   },
   module: {
@@ -20,7 +20,7 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         exclude: /node_modules/,
         use: [
-          'css-loader'
+          'css-loader', 'postcss-loader', 'sass-loader'
         ],
         sideEffects: true
       }
@@ -44,7 +44,7 @@ module.exports = {
     }),
     new ESLintPlugin({
       cache: true,
-      cacheLocation: path.join(__dirname, 'node_modules/.cache/eslint/'),
+      cacheLocation: path.join(__dirname, 'node_modules/.cache/eslint/.eslintcache'),
       emitWarning: true,
       fix: true
     })

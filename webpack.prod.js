@@ -55,6 +55,9 @@ const rules = [
             {
               modules: false
             }
+          ],
+          [
+            '@babel/preset-react'
           ]
         ]
       }
