@@ -72,6 +72,6 @@ const mini = {
   }
 }
 
-merged.module.rules.filter(o => Boolean(o.use)).filter(o => o.use.includes('css-loader'))[0].use.unshift(mini)
+merged.module.rules.filter(o => Boolean(o.use)).filter(o => o.use.includes('postcss-loader'))[0].use.unshift(mini)
 merged.module.rules = rules.concat(merged.module.rules)
 module.exports = merged

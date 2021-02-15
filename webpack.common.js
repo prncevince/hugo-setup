@@ -20,7 +20,13 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         exclude: /node_modules/,
         use: [
-          'css-loader', 'postcss-loader', 'sass-loader'
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          'postcss-loader', 'sass-loader'
         ],
         sideEffects: true
       }
