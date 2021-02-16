@@ -42,7 +42,7 @@ module.exports = {
       cleanOnceBeforeBuildPatterns: [
         'dist/**/*.js',
         'dist/**/*.css',
-        'site/data/webpack.json'
+        'site/data/webpack_assets.json'
       ]
     }),
     new Dotenv({
