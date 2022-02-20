@@ -30,6 +30,10 @@
     "setup:repo": "lerna bootstrap --hoist",
     "setup:hooks": "lerna exec --ignore hugo-site git config core.hooksPath ../../.husky",
     "setup:hooks:site": "lerna exec --scope hugo-site git config core.hooksPath ../.husky",
+    "submodule": "run-s submodule:*",
+    "submodule:remote": "git submodule add $npm_config_remote ./packages/$npm_config_app",
+    "submodule:absorb": "git submodule absorbgitdirs packages/$npm_config_app",
+    "submodule:hooks": "lerna exec --scope $npm_config_app git config core.hooksPath ../../.husky",
     "start": "run-p start:*",
     "start:noentry:cms": "run-p start:cms start:site start:webpack:nocms",
     "start:cms": "lerna exec netlify-cms-proxy-server --scope hugo-netlify-cms",
@@ -45,7 +49,7 @@
     "build:webpack": "webpack --config webpack.prod.js",
     "run:cms:build": "lerna run build --scope hugo-netlify-cms",
     "run:cms:start": "lerna run start --scope hugo-netlify-cms",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test $npm_config_app specified\" && exit 0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

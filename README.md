@@ -11,6 +11,7 @@ A Hugo setup using Lerna & Netlify CMS. This is a monorepo that builds/serves my
 |--.git/
 |--dist/                // what gets published
 |--site/
+|  |--.git/
 |  |--themes/
 |  |  |--theme-1/
 |  |  |  |--.git
@@ -40,19 +41,39 @@ A Hugo setup using Lerna & Netlify CMS. This is a monorepo that builds/serves my
 2. Install npm packages and setup:
 - `npm install`
   - This installs the root repo npm packages.
-  - Then, `husky install` sets up husky Git hooks 
-  - Then, `lerna bootstrap --hoist` installs the "leaf" packages `dependencies` & `devDependencies`.
-    - The `dependencies` and `devDependencies` shared across packages are ["hoisted"](https://github.com/lerna/lerna/blob/main/doc/hoist.md) using the `--hoist` flag
-  - Then, `lerna run git config core.hooksPath ../../.husky` adds the hook path as the root `./.husky/` for all submodules
+  - Next, `npm run postinstall` sequentially runs top to bottom the npm scripts:
+    - `setup:husky` - sets up husky Git hooks 
+    - `setup:repo` installs the Lerna "leaf" packages' `dependencies` & `devDependencies`.
+      - The `dependencies` and `devDependencies` shared across packages are ["hoisted"](https://github.com/lerna/lerna/blob/main/doc/hoist.md) using the `--hoist` flag
+    - `setup:hooks` & `setup:hooks:site` respectively add the hook path as the root `./.husky/` for all submodules
 
-### Add New Submodules 
+## Configuring New Submodules 
 
-`git submodule add git@remote-url.git ./packages/pkg-submodule`<br>
-`git submodule absorbgitdirs packages/pkg-submodule`
+Typically, this is done with a few manual steps. Instead, we've boiled this down to a single npm script `submodule`.
 
-### Configure Git Hooks for Submodules
+Replace `app-n` with name of `./packages/app-n` path and `remote` with remote ssh git repository path:
+- `npm run submodule --app=app-n --remote=remote` 
 
-Set working directory in submodule directory, e.g. `cd ./packages/pkg-submodule`
+### Breakdown
 
-`git config core.hooksPath ../../.husky`
+This just documents what the above does.
+
+#### Adds New Submodule to Monorepo
+
+- `submodule:remote` - registers `./packages/app-n` as submodule - clones remote repository to path if it does not exists 
+  - `git submodule add git@remote-url.git ./packages/app-n`
+- `submodule:absorb` - stores .git/ content of submodule in top level .git/ directory
+  - `git submodule absorbgitdirs packages/pkg-submodule`
+
+#### Configures Git Hooks for Submodules
+
+- `submodule:hooks` - This is what `setup:hooks` does - but for a single repo
+  - `lerna exec --scope $npm_config_app git config core.hooksPath ../../.husky`
+
+To run manually.
+- `npm run submodule:hooks --app=app-n` 
+
+To run even more manually: 
+- `cd ./packages/pkg-submodule`
+- `git config core.hooksPath ../../.husky`
 
